@@ -1,6 +1,19 @@
 from fastapi import FastAPI
+from fastapi import Depends
+
+from sqlalchemy.orm import Session
+
 from fastapi.middleware.cors import CORSMiddleware
-from pydantic import BaseModel
+
+from database import Base
+from database import engine
+from database import SessionLocal
+
+from models import SavedLink
+
+from schemas import SaveLinkRequest
+
+Base.metadata.create_all(bind=engine)
 
 app = FastAPI()
 
@@ -12,18 +25,33 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-class SaveLink(BaseModel):
-    url: str
 
-@app.get("/")
-def home():
-    return {"message": "API funcionando"}
+def get_db():
+    db = SessionLocal()
+
+    try:
+        yield db
+    finally:
+        db.close()
+
 
 @app.post("/save")
-def save_url(data: SaveLink):
-    print(data.url)
+def save_url(
+    data: SaveLinkRequest,
+    db: Session = Depends(get_db)
+):
+
+    new_link = SavedLink(
+        url=data.url
+    )
+
+    db.add(new_link)
+
+    db.commit()
+
+    db.refresh(new_link)
 
     return {
         "success": True,
-        "url": data.url
+        "id": new_link.id
     }
