@@ -4,8 +4,14 @@
   "version": "1.0",
 
   "permissions": [
-    "activeTab"
+    "activeTab",
+    "storage"
   ],
+
+  "host_permissions": [
+    "https://www.instagram.com/*",
+    "https://localhost:8000/*"
+  ],    
 
   "action": {
     "default_popup": "popup.html"
