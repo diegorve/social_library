@@ -21,9 +21,9 @@ document
       }
 
       const payload = {
-        url,
-        title,
-        platform,
+        url: tab.url,
+        title: tab.title,
+        platform: "instagram",
         saved_at: new Date().toISOString()
       };
 
