@@ -3,10 +3,11 @@ from sqlalchemy import Integer
 from sqlalchemy import Text
 from sqlalchemy import DateTime
 
+from typing import List
+
 from sqlalchemy.sql import func
 
 from app.database.database import Base
-
 
 class SavedLink(Base):
     __tablename__ = "saved_links"
@@ -31,6 +32,8 @@ class SavedLink(Base):
         Text,
         nullable=True
     )
+
+    tags: List[str] = []
 
     saved_at = Column(
         DateTime(timezone=True),

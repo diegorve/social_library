@@ -14,7 +14,6 @@ def save_url(
     data: SaveLinkRequest,
     db: Session = Depends(get_db)
 ):
-
     new_link = SavedLink(
         url=data.url,
         title=data.title,
