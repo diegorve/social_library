@@ -25,6 +25,7 @@ document
         title: tab.title,
         platform: "instagram",
         saved_at: new Date().toISOString()
+        tags: selectedTags
       };
 
       const response = await fetch(
@@ -39,6 +40,14 @@ document
       );
 
       const result = await response.json();
+
+      const selectedTags = Array.from(
+        document.querySelectorAll(
+          'input[name="tag"]:checked'
+        )
+      ).map(tag => tag.value);
+
+      console.log(selectedTags);
 
       document.getElementById("status").innerText =
         result.success
