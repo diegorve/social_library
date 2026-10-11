@@ -20,11 +20,19 @@ document
         platform = "instagram";
       }
 
+      const selectedTags = Array.from(
+        document.querySelectorAll(
+          'input[name="tag"]:checked'
+        )
+      ).map(tag => tag.value);
+
+      console.log(selectedTags);
+
       const payload = {
         url: tab.url,
         title: tab.title,
         platform: "instagram",
-        saved_at: new Date().toISOString()
+        saved_at: new Date().toISOString(),
         tags: selectedTags
       };
 
@@ -40,14 +48,6 @@ document
       );
 
       const result = await response.json();
-
-      const selectedTags = Array.from(
-        document.querySelectorAll(
-          'input[name="tag"]:checked'
-        )
-      ).map(tag => tag.value);
-
-      console.log(selectedTags);
 
       document.getElementById("status").innerText =
         result.success
