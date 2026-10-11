@@ -32,3 +32,10 @@ def save_url(
         "id": new_link.id
     }
 
+@router.get("/links")
+def get_links(
+    db: Session = Depends(get_db)
+):
+    links = db.query(SavedLink).all()
+    return links
+
