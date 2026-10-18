@@ -11,10 +11,7 @@ type Link = {
 
 async function getLinks(): Promise<Link[]> {
   const response = await fetch(
-    "http://127.0.0.1:8000/links",
-    {
-      cache: "no-store",
-    }
+    "http://127.0.0.1:8000/links"
   );
 
   if (!response.ok) {
