@@ -9,6 +9,8 @@ from sqlalchemy.sql import func
 
 from app.database.database import Base
 
+from sqlalchemy.dialects.postgresql import ARRAY
+
 class SavedLink(Base):
     __tablename__ = "saved_links"
 
@@ -33,7 +35,11 @@ class SavedLink(Base):
         nullable=True
     )
 
-    tags: List[str] = []
+    tags = Column(
+        ARRAY(Text),
+        nullable=True,
+        default=[]
+    )
 
     saved_at = Column(
         DateTime(timezone=True),

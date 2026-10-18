@@ -30,10 +30,10 @@ document
 
       const payload = {
         url: tab.url,
-        title: tab.title,
         platform: "instagram",
-        saved_at: new Date().toISOString(),
-        tags: selectedTags
+        title: tab.title,
+        tags: selectedTags,
+        saved_at: new Date().toISOString()
       };
 
       const response = await fetch(
