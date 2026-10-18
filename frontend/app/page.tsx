@@ -1,4 +1,5 @@
 import LibraryGrid from "@/components/LibraryGrid";
+import SearchableLibrary from "@/components/SearchableLibrary";
 
 type Link = {
   id: number;
@@ -32,7 +33,7 @@ export default async function Home() {
         Mi Biblioteca
       </h1>
 
-      <LibraryGrid links={links} />
+      <SearchableLibrary links={links} />
 
     </main>
   );
