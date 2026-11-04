@@ -4,13 +4,12 @@
   "version": "1.0",
 
   "permissions": [
-    "activeTab",
-    "storage"
+    "activeTab"
   ],
 
   "host_permissions": [
     "https://www.instagram.com/*",
-    "https://localhost:8000/*"
+    "http://localhost:8000/*"
   ],    
 
   "action": {

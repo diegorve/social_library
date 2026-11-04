@@ -8,3 +8,5 @@ class SaveLinkRequest(BaseModel):
     title: str
     tags: List[str] = []
     saved_at: datetime
+    thumbnail: str | None = None
+    description: str | None = None

@@ -19,7 +19,9 @@ def save_url(
         platform=data.platform,
         title=data.title,
         tags=data.tags,
-        saved_at=data.saved_at
+        saved_at=data.saved_at,
+        thumbnail_url=data.thumbnail,
+        description=data.description
     )
 
     db.add(new_link)
