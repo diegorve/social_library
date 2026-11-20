@@ -20,7 +20,7 @@ def save_url(
         title=data.title,
         tags=data.tags,
         saved_at=data.saved_at,
-        thumbnail_url=data.thumbnail,
+        thumbnail_url=data.thumbnail_url,
         description=data.description
     )
 
