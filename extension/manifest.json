@@ -7,6 +7,11 @@
     "activeTab"
   ],
 
+  "host_permissions": [
+    "https://www.instagram.com/*",
+    "http://localhost:8000/*"
+  ],    
+
   "action": {
     "default_popup": "popup.html"
   }
