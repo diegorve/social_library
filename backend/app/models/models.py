@@ -34,6 +34,16 @@ class SavedLink(Base):
         Text,
         nullable=True
     )
+    
+    thumbnail_url = Column(
+        Text,
+        nullable=True
+    )
+
+    description = Column(
+        Text,
+        nullable=True
+    )
 
     tags = Column(
         ARRAY(Text),

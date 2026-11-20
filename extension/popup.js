@@ -1,5 +1,32 @@
 console.log("cargado");
 
+function parseInstagramUrl(rawUrl) {
+    const url = new URL(rawUrl);
+    if (url.hostname !== "www.instagram.com") return null;
+
+    const match = url.pathname.match(/\/(p|reel|tv)\/([\w-]+)/);
+    if (!match) return null;
+
+    const [, type, code] = match;
+    return { url: `https://www.instagram.com/${type}/${code}/` };
+  }
+
+async function fetchPostMetadata(postUrl) {
+  const response = await fetch(postUrl, { credentials: "include" });
+  if (!response.ok) throw new Error(`HTTP ${response.status}`);
+
+  const html = await response.text();
+  const doc = new DOMParser().parseFromString(html, "text/html");
+  const meta = (name) =>
+    doc.querySelector(`meta[property="${name}"]`)?.content ?? null;
+
+  return {
+    title: meta("og:title"),
+    description: meta("og:description"),
+    thumbnail_url: meta("og:image"),
+  };
+};
+
 document
   .getElementById("saveBtn")
   .addEventListener("click", async () => {
@@ -10,30 +37,29 @@ document
       });
 
       const tab = tabs[0];
+      const status = document.getElementById("status");
 
-      const url = tab.url;
-      const title = tab.title;
-
-      let platform = "unknown";
-
-      if (url.includes("instagram.com")) {
-        platform = "instagram";
+      const post = parseInstagramUrl(tab.url);
+      if (!post) {
+        status.innerText = "Abre una publicación de Instagram para guardarla";
+        return;
       }
 
-      const selectedTags = Array.from(
-        document.querySelectorAll(
-          'input[name="tag"]:checked'
-        )
-      ).map(tag => tag.value);
+      status.innerText = "Leyendo la publicación...";
+      const meta = await fetchPostMetadata(post.url);
 
-      console.log(selectedTags);
+      const selectedTags = Array.from(
+        document.querySelectorAll('input[name="tag"]:checked')
+      ).map((tag) => tag.value);
 
       const payload = {
-        url: tab.url,
+        url: post.url,
         platform: "instagram",
-        title: tab.title,
+        title: meta.title ?? "Sin título",
+        description: meta.description,
+        thumbnail_url: meta.thumbnail_url,
         tags: selectedTags,
-        saved_at: new Date().toISOString()
+        saved_at: new Date().toISOString(),
       };
 
       const response = await fetch(

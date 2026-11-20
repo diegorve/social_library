@@ -2,9 +2,10 @@ import LibraryCard from "./LibraryCard";
 
 type Link = {
   id: number;
-  title: string;
   url: string;
   platform: string;
+  title: string;
+  tags: string[];
   saved_at: string;
 };
 
