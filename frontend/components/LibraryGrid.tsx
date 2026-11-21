@@ -1,13 +1,5 @@
 import LibraryCard from "./LibraryCard";
-
-type Link = {
-  id: number;
-  url: string;
-  platform: string;
-  title: string;
-  tags: string[];
-  saved_at: string;
-};
+import type { Link } from "@/types/link";
 
 export default function LibraryGrid({
   links,
@@ -15,7 +7,7 @@ export default function LibraryGrid({
   links: Link[];
 }) {
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
       {links.map((link) => (
         <LibraryCard
           key={link.id}

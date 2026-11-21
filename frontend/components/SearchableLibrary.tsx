@@ -2,15 +2,8 @@
 
 import { useState } from "react";
 import LibraryGrid from "./LibraryGrid";
+import type { Link } from "@/types/link";
 
-type Link = {
-  id: number;
-  url: string;
-  platform: string;
-  title: string;
-  tags: string[];
-  saved_at: string;
-};
 
 export default function SearchableLibrary({
   links,
