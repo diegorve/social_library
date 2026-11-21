@@ -12,6 +12,7 @@ export default function SearchableLibrary({
 }) {
   const [search, setSearch] = useState("");
   const [selectedTags, setSelectedTags] = useState<string[]>([]);
+  const [selectedLink, setSelectedLink] = useState<Link | null>(null);
 
   const allTags = Array.from(
     new Set(links.flatMap((link) => link.tags))
@@ -64,8 +65,9 @@ export default function SearchableLibrary({
                 </button>
             ))}
         </div>
-
-        <LibraryGrid links={filteredLinks} />
+        
+        {selectedLink && <p>Seleccionado: {selectedLink.title}</p>}
+        <LibraryGrid links={filteredLinks} onSelect={setSelectedLink} />
     </>
   );
 }
