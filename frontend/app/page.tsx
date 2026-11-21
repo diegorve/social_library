@@ -1,13 +1,6 @@
 import LibraryGrid from "@/components/LibraryGrid";
 import SearchableLibrary from "@/components/SearchableLibrary";
-
-type Link = {
-  id: number;
-  title: string;
-  url: string;
-  platform: string;
-  saved_at: string;
-};
+import type { Link } from "@/types/link";
 
 async function getLinks(): Promise<Link[]> {
   const response = await fetch(
