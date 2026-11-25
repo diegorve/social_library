@@ -2,15 +2,9 @@
 
 import { useState } from "react";
 import LibraryGrid from "./LibraryGrid";
+import PostViewer from "./PostViewer";
+import type { Link } from "@/types/link";
 
-type Link = {
-  id: number;
-  url: string;
-  platform: string;
-  title: string;
-  tags: string[];
-  saved_at: string;
-};
 
 export default function SearchableLibrary({
   links,
@@ -19,6 +13,7 @@ export default function SearchableLibrary({
 }) {
   const [search, setSearch] = useState("");
   const [selectedTags, setSelectedTags] = useState<string[]>([]);
+  const [selectedLink, setSelectedLink] = useState<Link | null>(null);
 
   const allTags = Array.from(
     new Set(links.flatMap((link) => link.tags))
@@ -71,8 +66,9 @@ export default function SearchableLibrary({
                 </button>
             ))}
         </div>
-
-        <LibraryGrid links={filteredLinks} />
+        
+        {selectedLink && <PostViewer link={selectedLink} onClose={() => setSelectedLink(null)} />}
+        <LibraryGrid links={filteredLinks} onSelect={setSelectedLink} />
     </>
   );
 }
