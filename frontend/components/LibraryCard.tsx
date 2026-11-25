@@ -2,11 +2,13 @@ import type { Link } from "@/types/link";
 
 export default function LibraryCard({
   link,
+  onClick,
 }: {
   link: Link;
+  onClick: () => void;
 }) {
   return (
-    <div className="border rounded-lg overflow-hidden shadow-sm bg-white">
+    <div className="border rounded-lg overflow-hidden shadow-sm bg-white cursor-pointer" onClick={onClick}>
 
         <div className="h-40 bg-gray-200 flex items-center justify-center">
             {link.thumbnail_url ? (

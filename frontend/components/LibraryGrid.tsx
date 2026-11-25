@@ -3,8 +3,10 @@ import type { Link } from "@/types/link";
 
 export default function LibraryGrid({
   links,
+  onSelect,
 }: {
   links: Link[];
+  onSelect: (link: Link) => void;
 }) {
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
@@ -12,6 +14,7 @@ export default function LibraryGrid({
         <LibraryCard
           key={link.id}
           link={link}
+          onClick={() => onSelect(link)}
         />
       ))}
     </div>
