@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import LibraryGrid from "./LibraryGrid";
+import PostViewer from "./PostViewer";
 import type { Link } from "@/types/link";
 
 
@@ -66,7 +67,7 @@ export default function SearchableLibrary({
             ))}
         </div>
         
-        {selectedLink && <p>Seleccionado: {selectedLink.title}</p>}
+        {selectedLink && <PostViewer link={selectedLink} onClose={() => setSelectedLink(null)} />}
         <LibraryGrid links={filteredLinks} onSelect={setSelectedLink} />
     </>
   );
